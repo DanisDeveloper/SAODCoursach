@@ -95,6 +95,7 @@ void registrationGuest(HashTable& guests) {
 void deleteGuest(HashTable& guests, CyclicList<Record>& records) { 
 	system("cls");
 	std::string str;
+	std::cout << "=====Deleting guest=====" << std::endl;
 	while (true) {
 		std::cout << "Enter passport of guest:";
 		std::getline(std::cin, str);
@@ -135,6 +136,7 @@ void deleteAllGuests(HashTable& guests, CyclicList<Record>& records) {
 void findGuestByPassport(HashTable& guests, CyclicList<Record>& records) {
 	system("cls");
 	std::string str;
+	std::cout << "=====Finding guest by passport=====" << std::endl;
 	while (true) {
 		std::cout << "Enter passport: ";
 		std::getline(std::cin, str);
@@ -165,6 +167,7 @@ void findGuestByPassport(HashTable& guests, CyclicList<Record>& records) {
 void findGuestByFullname(HashTable& guests) {
 	system("cls");
 	std::string str;
+	std::cout << "=====Finding guest by full name=====" << std::endl;
 	while (true) {
 		std::cout << "Enter full name: ";
 		std::getline(std::cin, str);
@@ -184,8 +187,7 @@ void addRoom(Tree& rooms) {
 	system("cls");
 	Room room;
 	std::string str;
-	std::cout << "Number must be like \"ANNN\"" << std::endl;
-	std::cout << "Available types = {S,M,L,H}" << std::endl;
+	std::cout << "=====Registration new room=====" << std::endl;
 
 	while (true) {
 		std::cout << "Enter number of room: ";
@@ -265,6 +267,7 @@ void addRoom(Tree& rooms) {
 void deleteRoom(Tree& rooms, CyclicList<Record>& records, HashTable& guests) {
 	system("cls");
 	std::string str;
+	std::cout << "=====Deleting room=====" << std::endl;
 	while (true) {
 		std::cout << "Enter number of room: ";
 		std::getline(std::cin, str);
@@ -297,12 +300,10 @@ void deleteRoom(Tree& rooms, CyclicList<Record>& records, HashTable& guests) {
 		}
 	}
 	try {
-		//Record& rec = records.getBy([&](Record record) { return record.getNumber() == str && record.getDateOut() == "-"; });
-		//std::cout << "Guest with passport \"" << rec.getPassport() << "\" lives in this room, move him out first" << std::endl;
-
+		records.getBy([&](Record record) { return record.getNumber() == str && record.getDateOut() == "-"; });
 		std::cout << std::endl << "Guests that lives in this room, move them out first" << std::endl;
 		guests.print([&](Guest guest) {
-			return records.findBy([&](Record rec) { return rec.getNumber() == str && rec.getDateOut() == "-"; });
+			return records.findBy([&](Record rec) { return rec.getPassport()==guest.getPassport()&&rec.getNumber() == str && rec.getDateOut() == "-"; });
 			});
 	}
 	catch (std::string error) {
@@ -314,6 +315,7 @@ void deleteRoom(Tree& rooms, CyclicList<Record>& records, HashTable& guests) {
 			std::cout << "Room with number \"" << str << "\" does not exist" << std::endl;
 		}
 	}
+	
 	getBackToMainMenu();
 }
 
@@ -337,8 +339,8 @@ void deleteAllRooms(Tree& rooms, CyclicList<Record>& records) {
 void findRoomByNumber(Tree& rooms, CyclicList<Record>& records, HashTable& guests) {
 	system("cls");
 	std::string str;
-	std::cout << "Number must be like \"ANNN\"" << std::endl;
-	std::cout << "Available types = {S,M,L,H}" << std::endl;
+	std::cout << "=====Finding room by number=====" << std::endl;
+
 
 	while (true) {
 		std::cout << "Enter number of room: ";
@@ -380,9 +382,10 @@ void findRoomByNumber(Tree& rooms, CyclicList<Record>& records, HashTable& guest
 	getBackToMainMenu();
 }
 
-void findRoomByEquipment(Tree& rooms) { // ///////////////////
+void findRoomByEquipment(Tree& rooms)	 {
 	system("cls");
 	std::string str;
+	std::cout << "=====Finding room by equipment=====" << std::endl;
 	std::cout << "Enter equipment: ";
 	std::getline(std::cin, str);
 	str = clearEdgeSpaces(str);
@@ -392,7 +395,7 @@ void findRoomByEquipment(Tree& rooms) { // ///////////////////
 			});
 	else
 		rooms.print([&](Room room) {
-		return true;
+			return true;
 			});
 	getBackToMainMenu();
 }
@@ -401,6 +404,8 @@ void registraionMoveIn(CyclicList<Record>& records, HashTable& guests,Tree& room
 	system("cls");
 	Record record;
 	std::string str;
+	std::cout << "=====Registration move in=====" << std::endl;
+
 	while (true) {
 		std::cout << "Enter passport: ";
 		std::getline(std::cin, str);
@@ -424,9 +429,6 @@ void registraionMoveIn(CyclicList<Record>& records, HashTable& guests,Tree& room
 		}
 	}
 
-
-	std::cout << "Number must be like \"ANNN\"" << std::endl;
-	std::cout << "Available types = {S,M,L,H}" << std::endl;
 	while (true) {
 		std::cout << "Enter number of room: ";
 		std::getline(std::cin, str);
@@ -484,7 +486,7 @@ void registraionMoveIn(CyclicList<Record>& records, HashTable& guests,Tree& room
 	record.setDateOut("-");
 	records.pushBack(record);
 	sortByNumber(records);
-	std::cout << "Successfully registered" << std::endl;
+	std::cout << "Successfully moved in" << std::endl;
 	getBackToMainMenu();
 }
 
@@ -492,6 +494,8 @@ void registraionMoveOut(CyclicList<Record>& records, HashTable& guests, Tree& ro
 	system("cls");
 	Record record;
 	std::string str;
+	std::cout << "=====Registration move out=====" << std::endl;
+
 	while (true) {
 		std::cout << "Enter passport: ";
 		std::getline(std::cin, str);
@@ -515,40 +519,40 @@ void registraionMoveOut(CyclicList<Record>& records, HashTable& guests, Tree& ro
 		}
 	}
 
-	while (true) {
-		std::cout << "Enter number of room: ";
-		std::getline(std::cin, str);
-		str = toUpper(clearEdgeSpaces(str));
+	//while (true) {
+	//	std::cout << "Enter number of room: ";
+	//	std::getline(std::cin, str);
+	//	str = toUpper(clearEdgeSpaces(str));
 
-		if (isRightNumber(str)) {
-			if (!rooms.find(Room(str))) {
-				try {
-					rooms.get(str);
-				}
-				catch (std::string error) {
-					std::cout << std::endl << "Room with number \"" << str << "\" does not exist" << std::endl;
-					getBackToMainMenu();
-					return;
-				}
-			}
-			if (!records.findBy([&](Record rec) { return rec.getNumber() == str && rec.getPassport() == record.getPassport() && rec.getDateOut() == "-"; })) {
-				std::cout << std::endl << "Person does not live in room with number \"" << str << "\"" << std::endl;
-				getBackToMainMenu();
-				return;
-			}
-			record.setNumber(str);
-			break;
-		}
-		else
-			std::cout << "Number must be like \"ANNN\"" << std::endl;
+	//	if (isRightNumber(str)) {
+	//		if (!rooms.find(Room(str))) {
+	//			try {
+	//				rooms.get(str);
+	//			}
+	//			catch (std::string error) {
+	//				std::cout << std::endl << "Room with number \"" << str << "\" does not exist" << std::endl;
+	//				getBackToMainMenu();
+	//				return;
+	//			}
+	//		}
+	//		if (!records.findBy([&](Record rec) { return rec.getNumber() == str && rec.getPassport() == record.getPassport() && rec.getDateOut() == "-"; })) {
+	//			std::cout << std::endl << "Person does not live in room with number \"" << str << "\"" << std::endl;
+	//			getBackToMainMenu();
+	//			return;
+	//		}
+	//		record.setNumber(str);
+	//		break;
+	//	}
+	//	else
+	//		std::cout << "Number must be like \"ANNN\"" << std::endl;
 
-		if (str[0] != Constants::LUX && str[0] != Constants::HALF_LUX && str[0] != Constants::SINGLE && str[0] != Constants::MANY) {
-			std::cout << "Available types = {S,M,L,H}" << std::endl;
-			continue;
-		}
-	}
+	//	if (str[0] != Constants::LUX && str[0] != Constants::HALF_LUX && str[0] != Constants::SINGLE && str[0] != Constants::MANY) {
+	//		std::cout << "Available types = {S,M,L,H}" << std::endl;
+	//		continue;
+	//	}
+	//}
 
-	Record& recordIn = records.getBy([&](Record rec) { return rec.getNumber() == str && rec.getPassport() == record.getPassport() && rec.getDateOut() == "-"; });
+	Record& recordIn = records.getBy([&](Record rec) { return rec.getPassport() == record.getPassport() && rec.getDateOut() == "-"; });
 	while (true) {
 		std::cout << "Enter date out(dd.MM.yyyy):";
 		std::getline(std::cin, str);
@@ -567,7 +571,7 @@ void registraionMoveOut(CyclicList<Record>& records, HashTable& guests, Tree& ro
 			std::cout << error << std::endl;
 		}
 	}
-	std::cout << "Successfully registered" << std::endl;
+	std::cout << "Successfully moved out from \""<<recordIn.getNumber()<<"\"" << std::endl;
 	getBackToMainMenu();
 }
 #endif

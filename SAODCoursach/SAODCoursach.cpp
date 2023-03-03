@@ -112,7 +112,7 @@ void printMenu(int index) {
 	std::cout << "Enter - select action" << std::endl;
 }
 
-void menu(HashTable guests, Tree rooms, CyclicList<Record> records) {
+void menu(HashTable& guests, Tree& rooms, CyclicList<Record>& records) {
 	int index = 0;
 	printMenu(index);
 	while (true) {
@@ -146,44 +146,5 @@ int main()
 	Tree rooms;
 	CyclicList<Record> records;
 	menu(guests,rooms,records);
-	 
-
-	//HashTable guests(Constants::HASH_TABLE_SIZE);
-	//for (int i = 0; i < 5000; i++)
-	//{
-	//	guests.insert(Guest(randomPassport(), "Tomas Angelo", 2000, "st.Pushkina", "robbery"));
-	//}
-	//guests.print();
-
-	//std::cout << std::endl << std::endl;
-
-	//Tree tree;
-	//tree.add(Room("A112"));
-	//tree.print();
-	//std::cout << tree.find(Room("A112"));
-	//tree.remove(Room("A112"));
-	//std::cout << tree.find(Room("A112"));
-	//tree.print();
-
-	//std::cout << std::endl << std::endl;
-
-	//CyclicList<Record> clst;
-	//clst.pushBack(Record("1111-111111", "A112", "10.02.2020", "14.02.2020"));
-	//clst.pushBack(Record("1111-111111", "A111", "10.02.2020", "14.02.2020"));
-	//clst.pushBack(Record("1111-111111", "A111", "10.02.2020", "14.02.2020"));
-	//clst.pushBack(Record("1112-111111", "A112", "15.02.2020", "18.02.2020"));
-	//clst.pushBack(Record("1113-111111", "A113", "01.02.2020", "14.02.2020"));
-	//clst.pushBack(Record("1113-111111", "A112", "01.02.2020", "14.02.2020"));
-	//for (int i = 0; i < clst.getSize(); i++)
-	//{
-	//	std::cout << clst[i] << std::endl;
-	//}
-	//std::cout << std::endl<<std::endl;
-	//sortByNumber(clst);
-	//for (int i = 0; i < clst.getSize(); i++)
-	//{
-	//	std::cout << clst[i] << std::endl;
-	//}
-
-	//std::cout << findSubstring("abcdabcf", "fadda") << std::endl;
+	
 }
