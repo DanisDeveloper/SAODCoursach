@@ -183,9 +183,8 @@ public:
 		return true;
 	}
 
-	void clearAllGuests(int size=1000) {
+	void clearAllGuests() {
 		clear();
-		_size = size;
 		_arr = new List <Guest>[_size];
 	}
 

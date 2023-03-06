@@ -41,12 +41,6 @@ class Tree {
 		recursivePrint(node->left, maxLengthNumber, maxLengthPlaces, maxLengthRooms, maxLengthBathroom, maxLengthEquipment, predicat);
 		recursivePrint(node->right, maxLengthNumber, maxLengthPlaces, maxLengthRooms, maxLengthBathroom, maxLengthEquipment, predicat);
 	}
-	//void max_length_number(Node* node, int& length_number) {
-	//	if (node == nullptr) return;
-	//	if (std::to_string(node->room).length() > length_number)length_number = std::to_string(node->room).length();
-	//	max_length_number(node->left, length_number);
-	//	max_length_number(node->right, length_number);
-	//}
 
 	int getHeight(Node* node) {
 		return node ? node->heightNode : 0;
